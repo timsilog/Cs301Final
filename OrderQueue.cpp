@@ -18,8 +18,10 @@ OrderQueue::~OrderQueue() {
 }
 
 int OrderQueue::issueOrderNumber() {
-    // find the next available orderNumber in the array
+    // return the next orderNumber in the array
     // set it to 1, and return that index
+    // if at end of array, start from beginning again
+    // throw if full
 }
 
 void OrderQueue::addOrder(Order addMe, bool needsId = false) {
