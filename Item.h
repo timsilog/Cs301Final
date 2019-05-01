@@ -15,9 +15,8 @@ class Item {
         std::string getName();
         double getPrice();
         void printItem();
-
-        // operator overload function
-        bool operator==(Item rhs);
+        bool operator==(Item const rhs);
 };
 
 #endif
+

@@ -86,10 +86,7 @@ void Menu::loadMenu(std::string inFile) {
 void Menu::saveMenu(std::string outFile) {
     std::ofstream file;
 
-    file.open(outFile);
-    if (!file) {
-        throw "ERROR: Couldn't open filename: " + outFile + '\n';
-    }
+    file.open("menuDB.txt");
     for (int i = 0; i < data.size(); i++) {
         file << data[i].getName() << ' ' << data[i].getPrice() << '\n';
     }

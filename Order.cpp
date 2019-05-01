@@ -1,65 +1,118 @@
 #include "Order.h"
+#include<iostream>
+#include<string>
+using namespace std; 
 
 // Default constructor
 Order::Order() {
-    // set all numbers to 0 and ItemLists to null
+	orderNumber = 0; 
+	size = 0;
+	items = NULL;
+	currentItem = NULL;
+	subtotal = 0; 
 }
 
 // Normal constructor
 Order::Order(int orderNum) {
-    // same as default constructor except 'orderNum'
+	orderNum = orderNum;
 }
 
 // Destructor
 Order::~Order() {
-    // deallocate 'ItemList *items' here
+    removeAllItems();
 }
 
 void Order::addItem(Item addMe) {
-    // increment 'size' and add to 'subtotal'
-    // add 'addMe' to list
+	ItemList* location; 
+	location = new ItemList;
+	location->data = addMe;
+	location->next = items;
+	items = location;
+	size++; 
+	subtotal += addMe.getPrice();
 }
 
 void Order::removeItem(Item removeMe) {
-    // traverse list 'items' until 'removeMe' is found
-    // then decrement size and subtract from subtotal
-    // then remove the item
-    // ignore all this if item isn't found
+	ItemList* temp = items;
+	ItemList* toDelete; // holder to delete an Item
+
+	if (temp->data == removeMe) {
+		size--;
+		subtotal -= removeMe.getPrice();
+		items = temp->next;
+		delete temp;
+		return;
+	}
+
+	while (temp->next != NULL) {
+		if (temp->next->data == removeMe) {
+			size--;
+			subtotal -= removeMe.getPrice();
+			toDelete = temp->next;
+			temp->next = temp->next->next;
+			delete toDelete;
+		}
+
+		temp = temp->next; 
+	}
 }
 
 void Order::removeAllItems() {
-    // same as destructor!
+	ItemList *temp;
+
+	while (items) {
+		temp = items;                   // O (n)
+		items = items->next;
+		delete temp;
+	}
 }
 
+// go back to the beginning for getNextItem()
 void Order::resetCurrentItem() {
-    // reset 'currentItem' pointer to null
+	currentItem = NULL;
 }
 
 void Order::setOrderNumber(int orderId) {
-    // set 'orderNumber' to 'orderId'
+	orderNumber = orderId; 
 }
 
 bool Order::containsItem(Item checkMe) {
-    // traverse list and return true if item is found
+	ItemList* temp;
+	
+	while (temp->next != NULL) {
+		if (temp->next->data == checkMe) {
+			temp->next = temp->next->next;
+			return true;
+		}
+	}
+	return false;
 }
 
 int Order::getOrderNumber() {
-    // return the 'orderNumber'
+	return orderNumber;
 }
 
 int Order::getSize() {
-    // return the size
+	return size;
 }
 
 double Order::getSubtotal() {
-    // return the subtotal
+	return subtotal;
 }
 
 void Order::printReceipt() {
-    // Come up with a fancy way to print all the
-    // items, their prices, and the subtotal!
+	// Come up with a fancy way to print all the
+	// items, their prices, and the subtotal!
+	ItemList* temp; 
+	while (temp) {
+
+		temp->data.printItem();
+		temp = temp->next;
+	}
+	cout << "subtotal" << subtotal << endl;
 }
 
 Item Order::getNextItem() {
-    // increment 'currentItem' pointer and return the item inside!
+	currentItem++;
+	return currentItem->data; 
 }
