@@ -1,5 +1,7 @@
 #include "Menu.h"
+#include <string>
 #include <iostream>
+#include <fstream>
 
 void Menu::addItem(std::string name, double price) {
     data.push_back(Item(name, price));
@@ -63,6 +65,33 @@ void Menu::printMenu() {
     for (int i = 0; i < data.size(); i++) {
         data[i].printItem();
         std::cout << std::endl;
+    }
+}
+
+// Adds all items from file to current menu
+void Menu::loadMenu(std::string inFile) {
+    std::ifstream file;
+    std::string line, name;
+    double price;
+
+    file.open(inFile);
+    if (!file) {
+        throw "ERROR: Couldn't open filename: " + inFile + '\n';
+    }
+    while (file >> name >> price) {
+        addItem(name, price);
+    }
+}
+
+void Menu::saveMenu(std::string outFile) {
+    std::ofstream file;
+
+    file.open(outFile);
+    if (!file) {
+        throw "ERROR: Couldn't open filename: " + outFile + '\n';
+    }
+    for (int i = 0; i < data.size(); i++) {
+        file << data[i].getName() << ' ' << data[i].getPrice() << '\n';
     }
 }
 

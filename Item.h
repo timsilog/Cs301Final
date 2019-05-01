@@ -17,7 +17,7 @@ class Item {
         void printItem();
 
         // operator overload function
-        
+        bool operator==(Item rhs);
 };
 
 #endif

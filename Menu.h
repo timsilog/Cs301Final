@@ -16,6 +16,8 @@ class Menu {
         void adjustItem(int index, std::string newName, double newPrice);
         void swapItems(int index1, int index2);
         void printMenu();
+        void loadMenu(std::string inFile);
+        void saveMenu(std::string outFile);
         int findItem(Item item);
         int getSize();
 };

@@ -2,9 +2,11 @@
 
 // Default constructor
 OrderQueue::OrderQueue() {
-    // set list to null and maxSize to some default number
-    // like 100 and allocate that much space to the array
-    // then set all elements of that array to 0
+    // Set list to null and maxSize to some default number
+    // like 100 and allocate that much space to the array,
+    // 'orderNumbers' then set all elements of that array 
+    // to 0.
+    // Also set size to 0.
 }
 
 // Normal constructor
@@ -22,6 +24,10 @@ int OrderQueue::issueOrderNumber() {
     // set it to 1, and return that index
     // if at end of array, start from beginning again
     // throw if full
+}
+
+int OrderQueue::getSize() {
+    // return size
 }
 
 void OrderQueue::addOrder(Order addMe, bool needsId = false) {

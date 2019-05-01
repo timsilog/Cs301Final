@@ -21,6 +21,7 @@ class OrderQueue {
         OrderQueue(int queueSize);
         ~OrderQueue();
         int     issueOrderNumber();
+        int     getSize();
         void    addOrder(Order addMe, bool needsId = false); //push
         void    removeAllOrders();
         void    removeOrder(Order removeMe);

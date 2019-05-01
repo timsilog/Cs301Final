@@ -28,3 +28,9 @@ double Item::getPrice() {
 void Item::printItem() {
     
 }
+
+bool Item::operator==(Item rhs) {
+    if (rhs.getName() == name && rhs.getPrice() == price)
+        return true;
+    return false;
+}

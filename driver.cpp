@@ -46,7 +46,8 @@ void goToBack(Menu &menu, OrderQueue &orders) {
     while (!done) {
         cout << "::BACK END::\n"
              << "1. Manage Menu\n"
-             << "2. Manage Orders\n";
+             << "2. Manage Orders\n"
+             << "3. Go back\n";
         cin >> option;
         switch (option) {
             case 1:
@@ -54,6 +55,9 @@ void goToBack(Menu &menu, OrderQueue &orders) {
                 break;
             case 2:
                 manageOrders(orders);
+                break;
+            case 3:
+                done = true;
                 break;
             default:
                 cout << "Sorry I didn't understand that option!\n";
@@ -74,7 +78,7 @@ void manageMenu(Menu &menu) {
              << "2. Add Item\n"
              << "3. Remove Item\n"
              << "4. Adjust Item\n"
-             << "5. Exit\n";
+             << "5. Go Back\n";
         cin >> option;
         switch (option) {
             case 1:
@@ -111,7 +115,7 @@ void manageMenu(Menu &menu) {
                     break;
                 }
                 while (index < 0) {
-                    cout << "Enter index to be adjusted: "
+                    cout << "Enter index to be adjusted: ";
                     cin >> index;
                     if (index >= menu.getSize()) {
                         cout << "Error: Invalid index!\n";
@@ -138,20 +142,39 @@ void manageMenu(Menu &menu) {
 
 void manageOrders(OrderQueue &orders) {
     bool done = false;
-    int option;
+    int option, index = -1;
 
     while (!done) {
         cout << "::MANAGE ORDERS::\n"
              << "1. See all orders\n"
              << "2. Remove an order\n"
              << "3. Clear all orders\n"
-             << "4. Exit\n";
+             << "4. Go back\n";
         cin >> option;
         switch (option) {
             case 1:
+                orders.printOrders();
             case 2:
+                if (!orders.getSize()) {
+                    cout << "Error: OrderQueue is empty!\n";
+                    break;
+                }
+                while (index < 0) {
+                    cout << "Enter index: ";
+                    cin >> index;
+                    if (index >= orders.getSize() || index < 0) {
+                        cout << "Error: Invalid index!\n";
+                        index = -1;
+                    }
+                }
+                orders.removeOrder();
+                index = -1;
+                cout << "Successfully removed item at index [" << index << "]\n";
+                break;
             case 3:
             case 4:
+                done = true;
+                break;
             default:
                 cout << "Sorry I didn't understand that option!\n";
                 break;
