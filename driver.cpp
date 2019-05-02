@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Menu.h"
 #include "OrderQueue.h"
 
@@ -9,13 +10,21 @@ void goToFront(Menu &menu, OrderQueue &orders);
 void manageMenu(Menu &menu);
 void manageOrders(OrderQueue &orders);
 
-
-int main() {
+int main(int argc, char **argv) {
     bool done = false;
+    ifstream ifile;
     Menu menu;
     OrderQueue orders;
     int option;
 
+    if (argc == 2) {
+        try {
+            menu.loadMenu(argv[1]);
+        } catch (string err) {
+            cout << err << endl;
+            return -1;
+        }
+    }
     while (!done) {
         cout << "::ADMIN PANEL::\n"
              << "1. BACK END\n"
@@ -35,6 +44,42 @@ int main() {
             default:
                 cout << "Sorry I didn't understand that option!\n";
                 break;
+        }
+    }
+}
+
+void startOrder(Menu &menu, OrderQueue &orders) {
+    int option;
+    bool done = false;
+
+    while (!done) {
+        menu.printMenu();
+
+    }
+}
+
+void goToFront(Menu &menu, OrderQueue &orders) {
+    int option;
+    bool done = false;
+
+    while (!done) {
+        cout << "::ARTA'S BURGERS POS::"
+             << "1. Start a new order\n"
+             << "2. See all orders\n"
+             << "3. Go back\n";
+        cin >> option;
+        switch (option) {
+            case 1:
+                startOrder(menu, orders);
+                break;
+            case 2:
+                orders.printOrders();
+                break;
+            case 3:
+                done = true;
+                break;
+            default:
+                cout << "Sorry I didn't understand that option!\n";
         }
     }
 }
@@ -78,11 +123,13 @@ void manageMenu(Menu &menu) {
              << "2. Add Item\n"
              << "3. Remove Item\n"
              << "4. Adjust Item\n"
-             << "5. Go Back\n";
+             << "5. Save Changes\n"
+             << "6. Go Back\n";
         cin >> option;
         switch (option) {
             case 1:
-                menu.printMenu();
+                // menu.printMenu();
+                cout << menu.getSize();
                 break;
             case 2:
                 cout << "Enter new item name: ";
@@ -131,6 +178,10 @@ void manageMenu(Menu &menu) {
                 cout << "Successfully edited item at index [" << index << "]\n";
                 break;
             case 5:
+                menu.saveMenu();
+                cout << "Successfully saved changes!\n";
+                break;
+            case 6:
                 done = true;
                 break;
             default:
@@ -167,11 +218,14 @@ void manageOrders(OrderQueue &orders) {
                         index = -1;
                     }
                 }
-                orders.removeOrder();
+                orders.completeOrder(index);
                 index = -1;
                 cout << "Successfully removed item at index [" << index << "]\n";
                 break;
             case 3:
+                orders.removeAllOrders();
+                cout << "Successfully remove all items from Order List.\n";
+                break;
             case 4:
                 done = true;
                 break;

@@ -7,9 +7,9 @@ Item::Item() { // Default constructor
 	price = 0;
 }
 
-Item::Item(std::string name, double price) { // normal constructor
-	name = name;
-	price = price;
+Item::Item(std::string str, double prc) { // normal constructor
+	name = str;
+	price = prc;
 }
 
 void Item::setName(std::string newName) {

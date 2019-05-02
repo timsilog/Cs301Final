@@ -4,10 +4,13 @@
 #include <fstream>
 
 void Menu::addItem(std::string name, double price) {
-    data.push_back(Item(name, price));
+    Item item = Item(name, price);
+    data.push_back(item);
+    std::cout << item.getName();
 }
 
 void Menu::addItem(Item item) {
+    std::cout << "weghiesna" << item.getName();
     data.push_back(item);
 }
 
@@ -83,21 +86,23 @@ void Menu::loadMenu(std::string inFile) {
     }
 }
 
-void Menu::saveMenu(std::string outFile) {
+void Menu::saveMenu() {
     std::ofstream file;
 
-    file.open("menuDB.txt");
+    file.open("menuDb.txt");
     for (int i = 0; i < data.size(); i++) {
         file << data[i].getName() << ' ' << data[i].getPrice() << '\n';
     }
 }
 
+// returns index of item or -1 if it can't find anything
 int Menu::findItem(Item item) {
     for (int i = 0; i < data.size(); i++) {
         if (data[i] == item) {
             return i;
         }
     }
+    return -1;
 }
 
 int Menu::getSize() {

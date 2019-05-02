@@ -15,6 +15,10 @@ Order::Order() {
 // Normal constructor
 Order::Order(int orderNum) {
 	orderNum = orderNum;
+    size = 0;
+    items = NULL;
+    currentItem = NULL;
+    subtotal = 0;
 }
 
 // Destructor

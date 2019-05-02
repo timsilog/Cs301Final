@@ -3,7 +3,7 @@
 #include "Order.h"
 
 struct OrderList {
-    Order *data;
+    Order data;
     OrderList *next;
 };
 
@@ -14,7 +14,7 @@ class OrderQueue {
         int latestOrderNumber;
         int maxSize;
         int size;
-        int orderNumbers[];
+        int currentOrder;
 
     public:
         OrderQueue();
@@ -22,12 +22,11 @@ class OrderQueue {
         ~OrderQueue();
         int     issueOrderNumber();
         int     getSize();
-        void    addOrder(Order addMe, bool needsId = false); //push
+        void    addOrder(Order addMe); //push
         void    removeAllOrders();
-        void    removeOrder(Order removeMe);
         void    printOrders();
-        Item    completeOrder(); //pop
-        Item    completeOrder(int orderNumber);
+        Order   completeOrder(); //pop
+        Order   completeOrder(int indexToDelete);
         Order   getCurrentOrder(); // front
         Order   getRecentOrder(); // back
 };

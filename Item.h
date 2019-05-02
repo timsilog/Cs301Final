@@ -9,7 +9,7 @@ class Item {
 
     public:
         Item();
-        Item(std::string name, double price);
+        Item(std::string str, double prc);
         void setName(std::string newName);
         void setPrice(double price);
         std::string getName();
