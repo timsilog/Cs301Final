@@ -1,7 +1,6 @@
 #include "Order.h"
 #include<iostream>
 #include<string>
-using namespace std; 
 
 // Default constructor
 Order::Order() {
@@ -105,18 +104,45 @@ double Order::getSubtotal() {
 }
 
 void Order::printReceipt() {
-	// Come up with a fancy way to print all the
-	// items, their prices, and the subtotal!
-	ItemList* temp; 
-	while (temp) {
+	ItemList* temp = items; 
+    int i = 0;
 
+    if (orderNumber) {
+        std::cout << "Order #" << orderNumber << std::endl;
+    } else {
+        std::cout << "Current Order:\n";
+    }
+	while (temp) {
+        std::cout << i++ << ". ";
 		temp->data.printItem();
 		temp = temp->next;
 	}
-	cout << "subtotal" << subtotal << endl;
+	std::cout << "-----\nSubtotal: $" << subtotal << std::endl;
 }
 
 Item Order::getNextItem() {
 	currentItem++;
 	return currentItem->data; 
+}
+
+ItemList* Order::cloneList(ItemList *list) {
+    if (!list) {
+        return nullptr;
+    }
+    ItemList *temp = new ItemList();
+    temp->data = list->data;
+    temp->next = cloneList(list->next);
+    return temp;
+}
+
+// copies with reset currentItem
+Order& Order::operator=(Order const &rhs) {
+    if (rhs.size) {
+        orderNumber = rhs.orderNumber;
+        size = rhs.size;
+        currentItem = nullptr;
+        subtotal = rhs.subtotal;
+        items = cloneList(rhs.items);
+    }
+    return *this;
 }

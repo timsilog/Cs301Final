@@ -1,5 +1,6 @@
 #include "Item.h"
 #include <iostream>
+#include <iomanip>
 
 // Constructors
 Item::Item() { // Default constructor
@@ -28,10 +29,9 @@ double Item::getPrice() {
 	return price;
 }
 
-
-// FIX THIS
 void Item::printItem() {
-	std::cout << " name" << name << "price" << price << std::endl;
+	std::cout << std::fixed << std::setprecision(2) 
+              << name << ": $" << price << std::endl;
 }
 
 bool Item::operator==(Item const rhs) {

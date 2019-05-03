@@ -17,6 +17,7 @@ class Menu {
         void printMenu();
         void loadMenu(std::string inFile);
         void saveMenu();
+        Item getItem(int index);
         int findItem(Item item);
         int getSize();
 };

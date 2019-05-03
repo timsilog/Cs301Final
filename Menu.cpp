@@ -6,11 +6,9 @@
 void Menu::addItem(std::string name, double price) {
     Item item = Item(name, price);
     data.push_back(item);
-    std::cout << item.getName();
 }
 
 void Menu::addItem(Item item) {
-    std::cout << "weghiesna" << item.getName();
     data.push_back(item);
 }
 
@@ -64,8 +62,9 @@ void Menu::swapItems(int index1, int index2) {
 }
 
 void Menu::printMenu() {
-    std::cout << "MENU\n";
+    std::cout << "\nMENU\n";
     for (int i = 0; i < data.size(); i++) {
+        std::cout << i << ". ";
         data[i].printItem();
         std::cout << std::endl;
     }
@@ -93,6 +92,14 @@ void Menu::saveMenu() {
     for (int i = 0; i < data.size(); i++) {
         file << data[i].getName() << ' ' << data[i].getPrice() << '\n';
     }
+}
+
+Item Menu::getItem(int index) {
+    if (index < 0 || index >= data.size()) {
+        throw "ERROR: Index out of bounds (E.G. < 0 or >= size";
+    }
+
+    return data[index];
 }
 
 // returns index of item or -1 if it can't find anything

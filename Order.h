@@ -14,6 +14,7 @@ private:
 	ItemList    *items; // front of list
 	ItemList    *currentItem; // pointer for getNextItem()
 	double      subtotal; // sum of all prices
+    ItemList*   cloneList(ItemList *list);
 
 public:
 	Order();
@@ -30,6 +31,7 @@ public:
 	double  getSubtotal();
 	void    printReceipt();
 	Item    getNextItem();
+    Order&  operator=(Order const &rhs);
 };
 
 #endif
