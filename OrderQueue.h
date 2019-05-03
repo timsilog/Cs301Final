@@ -22,14 +22,13 @@ class OrderQueue {
         ~OrderQueue();
         int     issueOrderNumber();
         int     getSize();
-        void    addOrder(Order &addMe); //push
-        void    removeAllOrders();
-        void    printOrders();
-        Order*   completeOrder(); //pop
-        Order*   completeOrder(int indexToDelete);
+        void    addOrder(Order &addMe); // enqueue
+        void    removeAllOrders(); // O(n)
+        void    printOrders(); // O(n)
+        Order*  completeOrder(); // dequeue
+        Order*  completeOrder(int indexToDelete); // O(n)
         Order   getCurrentOrder(); // front
         Order   getRecentOrder(); // back
-        
 };
 
 #endif

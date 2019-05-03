@@ -9,6 +9,9 @@ void goToBack(Menu &menu, OrderQueue &orders);
 void goToFront(Menu menu, OrderQueue &orders);
 void manageMenu(Menu &menu);
 void manageOrders(OrderQueue &orders);
+void addToOrder(Menu menu, Order &currentOrder);
+void removeFromOrder(Menu menu, Order &currentOrder);
+void startOrder(Menu menu, OrderQueue &orders);
 
 int main(int argc, char **argv) {
     bool done = false;
@@ -48,73 +51,29 @@ int main(int argc, char **argv) {
     }
 }
 
-void addToOrder(Menu menu, Order &currentOrder) {
-    int option = -1, size = menu.getSize();
+void goToBack(Menu &menu, OrderQueue &orders) {
+    int option;
     bool done = false;
 
     while (!done) {
-        cout << "Enter an item number: ";
-        cin >> option;
-        if (option >= 0 && option < size) {
-            currentOrder.addItem(menu.getItem(option));
-            break;
-        }
-        cout << "Not an item on our menu!\n";
-    }
-}
-
-void removeFromOrder(Menu menu, Order &currentOrder) {
-    int option = -1, size = menu.getSize();
-    bool done = false;
-
-    while (!done) {
-        cout << "Enter an item number: ";
-        cin >> option;
-        if (option >= 0 || option < size) {
-            currentOrder.removeItem(menu.getItem(option));
-            break;
-        }
-        cout << "Not an item on our menu!\n";
-    }
-}
-
-void startOrder(Menu menu, OrderQueue &orders) {
-    Order currentOrder;
-    int option = -1, size = menu.getSize();
-    bool done = false;
-
-    menu.printMenu();
-    while (!done) {
-        if (currentOrder.getSize()) {
-            cout << endl;
-            currentOrder.printReceipt();
-        }
-        cout << "\n::CREATE AN ORDER::\n"
-             << "1. Add item\n"
-             << "2. Remove item\n"
-             << "3. See Menu\n"
-             << "4. Submit order\n"
-             << "5. Exit\n";
+        cout << "\n::BACK END::\n"
+             << "1. Manage Menu\n"
+             << "2. Manage Orders\n"
+             << "3. Go back\n";
         cin >> option;
         switch (option) {
             case 1:
-                addToOrder(menu, currentOrder);
+                manageMenu(menu);
                 break;
             case 2:
-                removeFromOrder(menu, currentOrder);
+                manageOrders(orders);
                 break;
             case 3:
-                menu.printMenu();
-                break;
-            case 4:
-                orders.addOrder(currentOrder);
-                done = true;
-                break;
-            case 5:
                 done = true;
                 break;
             default:
                 cout << "Sorry I didn't understand that option!\n";
+                break;
         }
     }
 }
@@ -141,33 +100,6 @@ void goToFront(Menu menu, OrderQueue &orders) {
                 break;
             default:
                 cout << "Sorry I didn't understand that option!\n";
-        }
-    }
-}
-
-void goToBack(Menu &menu, OrderQueue &orders) {
-    int option;
-    bool done = false;
-
-    while (!done) {
-        cout << "\n::BACK END::\n"
-             << "1. Manage Menu\n"
-             << "2. Manage Orders\n"
-             << "3. Go back\n";
-        cin >> option;
-        switch (option) {
-            case 1:
-                manageMenu(menu);
-                break;
-            case 2:
-                manageOrders(orders);
-                break;
-            case 3:
-                done = true;
-                break;
-            default:
-                cout << "Sorry I didn't understand that option!\n";
-                break;
         }
     }
 }
@@ -293,6 +225,77 @@ void manageOrders(OrderQueue &orders) {
             default:
                 cout << "Sorry I didn't understand that option!\n";
                 break;
+        }
+    }
+}
+
+void addToOrder(Menu menu, Order &currentOrder) {
+    int option = -1, size = menu.getSize();
+    bool done = false;
+
+    while (!done) {
+        cout << "Enter an item number: ";
+        cin >> option;
+        if (option >= 0 && option < size) {
+            currentOrder.addItem(menu.getItem(option));
+            break;
+        }
+        cout << "Not an item on our menu!\n";
+    }
+}
+
+void removeFromOrder(Menu menu, Order &currentOrder) {
+    int option = -1, size = menu.getSize();
+    bool done = false;
+
+    while (!done) {
+        cout << "Enter an item number: ";
+        cin >> option;
+        if (option >= 0 || option < size) {
+            currentOrder.removeItem(menu.getItem(option));
+            break;
+        }
+        cout << "Not an item on our menu!\n";
+    }
+}
+
+void startOrder(Menu menu, OrderQueue &orders) {
+    Order currentOrder;
+    int option = -1, size = menu.getSize();
+    bool done = false;
+
+    menu.printMenu();
+    while (!done) {
+        if (currentOrder.getSize()) {
+            cout << endl;
+            currentOrder.printReceipt();
+        }
+        cout << "\n::CREATE AN ORDER::\n"
+             << "1. Add item\n"
+             << "2. Remove item\n"
+             << "3. See Menu\n"
+             << "4. Submit order\n"
+             << "5. Exit\n";
+        cin >> option;
+        switch (option) {
+            case 1:
+                addToOrder(menu, currentOrder);
+                break;
+            case 2:
+                removeFromOrder(menu, currentOrder);
+                break;
+            case 3:
+                menu.printMenu();
+                break;
+            case 4:
+                orders.addOrder(currentOrder);
+                done = true;
+                break;
+            case 5:
+                done = true;
+                break;
+            default:
+                cout << "Sorry I didn't understand that option!\n";
         }
     }
 }

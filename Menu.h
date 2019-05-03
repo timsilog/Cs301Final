@@ -14,11 +14,11 @@ class Menu {
         void removeItem(int index);
         void adjustItem(int index, std::string newName, double newPrice);
         void swapItems(int index1, int index2);
-        void printMenu();
-        void loadMenu(std::string inFile);
-        void saveMenu();
+        void printMenu(); // O(n)
+        void loadMenu(std::string inFile); // O(n)
+        void saveMenu(); // O(n)
         Item getItem(int index);
-        int findItem(Item item);
+        int findItem(Item item);  // O(n)
         int getSize();
 };
 

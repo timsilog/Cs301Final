@@ -80,7 +80,7 @@ void Order::setOrderNumber(int orderId) {
 }
 
 bool Order::containsItem(Item checkMe) {
-	ItemList* temp;
+	ItemList* temp = items;
 	
 	while (temp->next != NULL) {
 		if (temp->next->data == checkMe) {

@@ -13,25 +13,25 @@ private:
 	int         size;
 	ItemList    *items; // front of list
 	ItemList    *currentItem; // pointer for getNextItem()
-	double      subtotal; // sum of all prices
-    ItemList*   cloneList(ItemList *list);
+	double      subtotal;
+    ItemList*   cloneList(ItemList *list); // O(n)
 
 public:
 	Order();
 	Order(int orderNum);
-	~Order(); // destructor to deallocate ItemList
+	~Order();
 	void    addItem(Item addMe);
-	void    removeItem(Item removeMe);
-	void    removeAllItems();
+	void    removeItem(Item removeMe); // O(n)
+	void    removeAllItems(); // O(n)
 	void    resetCurrentItem();
 	void    setOrderNumber(int orderId);
-	bool    containsItem(Item checkMe); // maybe
+	bool    containsItem(Item checkMe); // O(n)
 	int     getOrderNumber();
 	int     getSize();
 	double  getSubtotal();
-	void    printReceipt();
+	void    printReceipt(); // O(n)
 	Item    getNextItem();
-    Order&  operator=(Order const &rhs);
+    Order&  operator=(Order const &rhs); // O(n)
 };
 
 #endif
