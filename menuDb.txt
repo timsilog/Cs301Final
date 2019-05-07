@@ -1,0 +1,3 @@
+Burger 2.5
+Fries 1.5
+Soda 1
