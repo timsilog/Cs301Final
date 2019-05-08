@@ -113,7 +113,7 @@ void Order::printReceipt() {
         std::cout << "Current Order:\n";
     }
 	while (temp) {
-        std::cout << i++ << ". ";
+        std::cout << ++i << ". ";
 		temp->data.printItem();
 		temp = temp->next;
 	}

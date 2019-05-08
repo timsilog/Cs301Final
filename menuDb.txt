@@ -1,3 +1,6 @@
 Burger 2.5
 Fries 1.5
 Soda 1
+kimchi 12.5
+Sandwich 2
+Juice 1

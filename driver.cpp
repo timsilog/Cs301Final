@@ -136,17 +136,18 @@ void manageMenu(Menu &menu) {
                     cout << "Error: Menu is empty!\n";
                     break;
                 }
+                menu.printMenu();
                 while (index < 0) {
-                    cout << "Enter index (Menu number - 1): ";
+                    cout << "Enter item number: ";
                     cin >> index;
-                    if (index >= menu.getSize()) {
+                    if (--index >= menu.getSize()) {
                         cout << "Error: Invalid index!\n";
                         index = -1;
                     }
                 }
                 menu.removeItem(index);
-                index = -1;
                 cout << "Successfully removed item at index [" << index << "]\n";
+                index = -1;
                 break;
             case 4:
                 if (!menu.getSize()) {
@@ -166,8 +167,8 @@ void manageMenu(Menu &menu) {
                 cout << "Enter new price: ";
                 cin >> price;
                 menu.adjustItem(index, name, price);
-                index = -1;
                 cout << "Successfully edited item at index [" << index << "]\n";
+                index = -1;
                 break;
             case 5:
                 menu.saveMenu();
@@ -236,6 +237,7 @@ void addToOrder(Menu menu, Order &currentOrder) {
     while (!done) {
         cout << "Enter an item number: ";
         cin >> option;
+        option--;
         if (option >= 0 && option < size) {
             currentOrder.addItem(menu.getItem(option));
             break;
@@ -248,10 +250,12 @@ void removeFromOrder(Menu menu, Order &currentOrder) {
     int option = -1, size = menu.getSize();
     bool done = false;
 
+    menu.printMenu();
     while (!done) {
         cout << "Enter an item number: ";
         cin >> option;
-        if (option >= 0 || option < size) {
+        option--;
+        if (option >= 0 && option < size) {
             currentOrder.removeItem(menu.getItem(option));
             break;
         }

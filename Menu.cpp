@@ -64,7 +64,7 @@ void Menu::swapItems(int index1, int index2) {
 void Menu::printMenu() {
     std::cout << "\nMENU\n";
     for (int i = 0; i < data.size(); i++) {
-        std::cout << i << ". ";
+        std::cout << i + 1 << ". ";
         data[i].printItem();
         std::cout << std::endl;
     }
